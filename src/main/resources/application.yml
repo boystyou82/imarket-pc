@@ -1,0 +1,55 @@
+
+---
+
+spring:
+  profiles: local
+
+api:
+  #host: http://122.1.18.246:8080
+  host: http://211.172.254.106:80
+
+solr:
+  ip: http://211.172.254.103:8080/imarket/
+  AUTOIP : http://211.172.254.103:8080/autocmpl/
+
+logging:
+  level:
+    root : info
+
+---
+
+spring:
+  profiles: dev
+
+api:
+  host: http://211.172.254.106:80
+
+solr:
+  ip: http://211.172.254.103:8080/imarket/
+  AUTOIP: http://211.172.254.103:8080/autocmpl/
+  #ip: http://211.172.254.103:9090/imarket/
+  #AUTOIP : http://211.172.254.103:9090/autocmpl/
+
+server:
+  tomcat:
+    basedir: /webserver/imarket/tomcat_log
+    accesslog:
+      enabled: true
+      suffix: .log
+      prefix: access_log
+      file-date-format: .yyyy-MM-dd
+      pattern: common
+
+logging:
+  level:
+    root : info
+
+---
+
+spring:
+  profiles: stage
+
+---
+
+spring:
+  profiles: real

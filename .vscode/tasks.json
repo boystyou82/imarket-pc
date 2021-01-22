@@ -1,0 +1,43 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "dev-build",
+            "type": "shell",
+            "command": "SPRING_PROFILES_ACTIVE=dev ./gradlew clean build"
+        },
+        {
+            "label": "dev-bootrun",
+            "type": "shell",
+            "command": "SPRING_PROFILES_ACTIVE=dev ./gradlew bootrun"
+        },
+        {
+            "label": "local-build",
+            "type": "shell",
+            "command": "SPRING_PROFILES_ACTIVE=local ./gradlew clean build"
+        },
+        {
+            "label": "local-bootrun",
+            "type": "shell",
+            "command": "SPRING_PROFILES_ACTIVE=local ./gradlew bootrun"
+        },
+        {
+            "label": "react-yarn install",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend"
+            },
+            "command": "yarn"
+        },
+        {
+            "label": "react-yarn start",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend"
+            },
+            "command": "yarn start"
+        }
+    ]
+}

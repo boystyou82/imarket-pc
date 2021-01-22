@@ -1,0 +1,51 @@
+plugins {
+  id "com.github.node-gradle.node" version "2.2.4"
+}
+
+apply plugin: 'base'
+
+node {
+    version = '10.22.1'
+    yarnVersion = '1.22.5'
+    download=true
+}
+
+yarn_run_build {
+    inputs.files fileTree('public')
+    inputs.files fileTree('src')
+
+    inputs.file 'package.json'
+    inputs.file 'yarn.lock'
+
+    outputs.dir 'build'
+}
+
+task packageReactApp(type: Zip) {
+    dependsOn yarn_run_build
+    baseName 'react-app'
+    extension 'jar'
+    destinationDir file("${projectDir}/build_packageReactApp")
+    from('build') {
+        into 'static'
+    }
+}
+
+configurations {
+    yarnResources
+}
+
+configurations.default.extendsFrom(configurations.yarnResources)
+
+artifacts {
+    yarnResources(packageReactApp.archivePath) {
+        builtBy packageReactApp
+        type 'jar'
+    }
+}
+
+assemble.dependsOn packageReactApp
+
+
+clean {
+    delete packageReactApp.archivePath
+}
